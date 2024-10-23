@@ -27,6 +27,6 @@
 
 <script>
 export default {
-    name: 'Signup'
-}
+    name: 'Singup'
+};
 </script>
