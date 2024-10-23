@@ -1,3 +1,4 @@
+vue
 <template>
     <form>
         <h3>Sign Up</h3>
@@ -27,6 +28,7 @@
 
 <script>
 export default {
-    name: 'Singup'
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'signup'
 };
 </script>
