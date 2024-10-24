@@ -9,6 +9,9 @@ const route = useRoute() // Get the current route
   <div>
     <!-- Conditionally render the sidebar except on the login route -->
     <SideBar v-if="route.name !== 'login'" @search-input-emit="search" :is-used-vue-router="true" />
+    <SideBar v-if="route.firstName !== 'signup'" @search-input-emit="search" :is-used-vue-router="true" />
+    <SideBar v-if="route.lastName  !== 'signup'" @search-input-emit="search" :is-used-vue-router="true" />
+    
 
     <!-- Render the current route's component -->
     <RouterView />

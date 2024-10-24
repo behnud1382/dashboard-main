@@ -19,24 +19,56 @@ vue
                 <div class="relative">
                   <input
                     autocomplete="off"
-                    v-model="username"
-                    name="username"
+                    v-model="firstName"
+                    name="firstName"
                     type="text"
                     class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
-                    placeholder="username"
+                    placeholder="First Name"
                     required
                   />
                   <label
-                    for="username"
+                    for="firstName"
                     class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >Username</label
+                    >First Name</label
+                  >
+                </div>
+                <div class="relative">
+                  <input
+                    autocomplete="off"
+                    v-model="lastName"
+                    name="lastName"
+                    type="text"
+                    class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
+                    placeholder="Last Name"
+                    required
+                  />
+                  <label
+                    for="lastName"
+                    class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                    >Last Name</label
+                  >
+                </div>
+                <div class="relative">
+                  <input
+                    autocomplete="off"
+                    v-model="email"
+                    name="email"
+                    type="email"
+                    class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
+                    placeholder="Email"
+                    required
+                  />
+                  <label
+                    for="email"
+                    class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                    >Email</label
                   >
                 </div>
                 <div class="relative">
                   <input
                     autocomplete="off"
                     v-model="password"
-                    placeholder="password"
+                    placeholder="Password"
                     class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
                     type="password"
                     required
@@ -51,7 +83,7 @@ vue
                   <input
                     autocomplete="off"
                     v-model="confirmPassword"
-                    placeholder="confirm password"
+                    placeholder="Confirm Password"
                     class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
                     type="password"
                     required
@@ -89,39 +121,53 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const username = ref('');
+const firstName = ref('');
+const lastName = ref('');
+const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const signupMessage = ref('');
 
 // Fetch and sign up user when form is submitted
 const signup = async () => {
-  const usernameValue = username.value;
   const passwordValue = password.value;
   const confirmPasswordValue = confirmPassword.value;
 
+  // Check if passwords match
   if (passwordValue !== confirmPasswordValue) {
     signupMessage.value = "Passwords do not match.";
     return;
   }
 
   try {
-    const res = await fetch('http://localhost:3000/signup', { // Change endpoint to signup
+    const res = await fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username: usernameValue, password: passwordValue })
+      body: JSON.stringify({
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: passwordValue
+      })
     });
+
     const data = await res.json();
+
     if (res.ok) {
       console.log('User signed up successfully');
       router.push('/login'); // Redirect to login after signup
     } else {
-      signupMessage.value = data.message;
+      signupMessage.value = data.message || "Signup failed. Please try again.";
     }
   } catch (error) {
     console.error('Error signing up:', error);
+    signupMessage.value = "An error occurred during signup. Please try again.";
   }
 };
 </script>
+
+<style scoped>
+/* Add any additional styles here */
+</style>

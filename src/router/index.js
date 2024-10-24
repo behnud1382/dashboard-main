@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import CalendarView from '@/views/CalendarView.vue'
-import SettingsView from '@/views/SettingsView.vue'
-import FaqView from '@/views/FaqView.vue'
-import NotFoundView from '@/views/NotFoundView.vue'
-import LoginPage from '@/views/LoginPage.vue'
-import SignupPage from '@/views/Signup.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '@/views/HomeView.vue';
+import CalendarView from '@/views/CalendarView.vue';
+import SettingsView from '@/views/SettingsView.vue';
+import FaqView from '@/views/FaqView.vue';
+import NotFoundView from '@/views/NotFoundView.vue';
+import LoginPage from '@/views/LoginPage.vue';
+import SignupPage from '@/views/SignupPage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,11 +41,11 @@ const router = createRouter({
       component: LoginPage
     },
     {
-      path: '/login',
-      name: 'singup',
+      path: '/signup',
+      name: 'signup',  // Corrected from 'singup' to 'signup'
       component: SignupPage
     }
   ]
 })
 
-export default router
+export default router;
