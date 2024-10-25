@@ -64,7 +64,13 @@ const props = defineProps({
         name: 'FAQ',
         tooltip: 'FAQ',
         icon: 'bx-message-dots'
-      }
+      },
+      {
+        link:'/signup',
+        name: 'Sign Up',
+        tooltip: 'Sign Up',
+        icon : 'bx-message-dots'
+      },
     ]
   },
   isSearch: {
@@ -177,6 +183,9 @@ const menuItemClicked = (link) => {
 const exitButtonClicked = () => {
   router.push('/login')
 }
+const signUpClicked = () => {
+  router.push('/signup');
+}
 
 onMounted(() => {
   isOpened.value = props.isMenuOpen
@@ -251,6 +260,11 @@ const tooltipAttached = () => {
           />
         </ul>
       </div>
+      <li @click="signUpClicked">
+      <i class="bx bx-user-plus" />
+      <span> class= "links_name">Sign Up </span>
+      <span> data-target="signup" class="tooltip">Sign Up</span>
+      </li>
 
       <div v-if="isLoggedIn" class="profile">
         <div class="profile-details">

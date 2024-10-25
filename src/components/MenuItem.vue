@@ -34,6 +34,7 @@ const emit = defineEmits(['menu-item-clicked'])
 const menuItemClicked = () => {
   emit('menu-item-clicked', props.menuItem.link)
 }
+
 </script>
 
 <style scoped>
